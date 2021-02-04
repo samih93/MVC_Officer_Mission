@@ -1,0 +1,350 @@
+﻿@model IEnumerable<MVC_Officer_Mission.Models.Mission>
+
+@{
+    ViewBag.Title = "الدورات";
+}
+
+<h2> الدورات</h2>
+@*
+    <table class="table dataTableTournaments">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tournament.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tournament.Room)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tournament.DocumentOrder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tournament.GraduationDate)
+                </th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tournament.Department)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tournament.Room)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tournament.DocumentOrder)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tournament.GraduationDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("الضباط المكلفين", "Details", new { tournamnet_id = item.TournamentID }, new { @class = "btndetails btn btn-primary", @tournamnet_id = item.TournamentID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+    @section Styles{
+        @Styles.Render("~/Content/DataTables")
+        @Styles.Render("~/Content/fancybox")
+    }
+    @section Scripts{
+        @Scripts.Render("~/bundles/DataTables")
+        @Scripts.Render("~/bundles/fancybox")
+    <script>
+        $(document).ready(function () {
+            $('.dataTableTournaments').DataTable({
+                "order": [],
+                "language": DataTablesLang,
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+
+
+
+                $(function (){
+                    $('.btndetails').click(function () {
+                        var url = $(this).attr('href');
+                        var dialog = $('<div style="display:none"></div>').appendTo('body');
+                        dialog.load(url, {},
+                            function (responseText, textStatus, XMLHttpRequest) {
+                                dialog.dialog({
+                                    close: function (event, ui) {
+                                        dialog.remove();
+                                    }
+                                });
+                            });
+                        return false;
+                    });
+            });
+
+
+
+
+
+                //$('.tournamentDetailsBtn').fancybox({
+                //    autoSize: true,
+                //    type: 'ajax'
+                //});
+            });
+
+
+        </script>
+    }*@
+
+
+<div class="col-md-10">
+    <h1 id="monthName"></h1>
+</div>
+<div class="col-md-2">
+</div>
+<div class="col-md-10">
+    <div id="calHolder"></div>
+</div>
+<div class="col-md-2">
+    <div id="nav"></div>
+</div>
+<div class="col-md-12">
+    <div id="eventsHolder" class="hidden">
+    </div>
+    <div id="missionEditUrl" class="hidden"> @Html.ActionLink("EditLink", "Edit", "Missions")</div>
+
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/Content/daypilotcalendar")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/daypilotcalendar")
+    <script>
+        //function treatAsUTC(date) {
+        //    var result = new Date(date);
+        //    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+        //    return result;
+        //}
+
+        //function daysBetween(startDate, endDate) {
+        //    var millisecondsPerDay = 24 * 60 * 60 * 1000;
+        //    return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+        //}
+
+        function get_current_date() {
+            var d = new Date();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var strDate = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+            return strDate.toString();
+        }
+
+
+        function populate_events_holder(dp, start_date) {
+            var tournamentDataUrl = "/Missions/GetAjaxData";
+            tournamentDataUrl += "?start_date=" + start_date;
+
+
+            //clearing events
+            dp.events.list = [];
+
+            //coloring the last day of each event
+            dp.onBeforeCellRender = function (args) {
+                var cell_start_date = args.cell.start;
+                $("#eventsHolder tr").each(function () {
+                    var mission_tournament_graduation_date = $(this).find(".mission_tournament_graduation_date").text().trim().toString("yyyy-MM-dd");
+                    if (mission_tournament_graduation_date.toString() != "" && cell_start_date == mission_tournament_graduation_date.concat("T00:00:00").toString()) {
+                        args.cell.backColor = "#30a530";
+                    }
+                })
+            };
+
+            //get events
+            $.ajax({
+                url: tournamentDataUrl
+            }).success(function (data) {
+                $("#eventsHolder").html($(data).filter("#missions_holder"));
+            }).done(function (data) {
+                // generate and load events
+                $("#eventsHolder tr").each(function () {
+                    if ($(this).find(".mission_id").length > 0) {
+                        var mission_id = $(this).find(".mission_id").text();
+                        var mission_name = $(this).find(".mission_name").text().toString().trim();
+                        var mission_from = $(this).find(".mission_from").text().toString().trim();
+                        var mission_to = $(this).find(".mission_to").text().toString().trim();
+                        var officer = "";
+                        $(this).find(".officer .officerItem").each(function () {
+                            officer += $(this).text().toString() + "<br/>";
+                        });
+                        var duration = Math.round(daysBetween(new Date(mission_from), new Date(mission_to)));
+
+                        var mission_tournament_department = $(this).find(".mission_tournament_department").text();
+                        var mission_tournament_room = $(this).find(".mission_tournament_room").text();
+                        var mission_tournament_document_order = $(this).find(".mission_tournament_document_order").text();
+                        var mission_tournament_graduation_date = $(this).find(".mission_tournament_graduation_date").text().trim().toString("yyyy-MM-dd");
+
+                        var e = new DayPilot.Event({
+                            start: new DayPilot.Date(mission_from.trim().concat("T00:00:00").toString()),
+                            end: new DayPilot.Date(mission_from.trim().concat("T00:00:00").toString()).addDays(duration),
+                            id: DayPilot.guid(),
+                            text: mission_name,
+                            //backColor: color_code,
+                            moveDisabled: true,
+                            tags: {
+                                id: mission_id,
+                                mission_name: mission_name,
+                                mission_from: mission_from,
+                                mission_to: mission_to,
+                                officer: officer,
+                                mission_tournament_department: mission_tournament_department,
+                                mission_tournament_room: mission_tournament_room,
+                                mission_tournament_document_order: mission_tournament_document_order,
+                                mission_tournament_graduation_date: mission_tournament_graduation_date,
+                                url: "myurl"
+                            }
+
+                        });
+
+                        dp.events.add(e);
+
+                    }
+
+                });
+                dp.update();
+            });
+        }
+
+        $(window).load(function () {
+            //localization translation into arabic
+            DayPilot.Locale.register(new DayPilot.Locale('ar-sa', {
+                'dayNames': ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+                'dayNamesShort': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                'monthNames': ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'أيار', 'حزيران', 'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
+                'monthNamesShort': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                'timePattern': 'h:mm tt',
+                'datePattern': 'M/d/yyyy',
+                'dateTimePattern': 'M/d/yyyy h:mm tt',
+                'timeFormat': 'Clock12Hours',
+                'weekStarts': 1
+            }
+            ));
+
+            var locale_name = "ar-sa";
+
+
+            var dp = new DayPilot.Month("calHolder");
+            dp.locale = locale_name;
+            dp.ShowToolTip = false;
+            dp.cssClassPrefix = "month_traditional";
+            dp.allowMultiSelect = false;
+            //start by monday
+            dp.weekStarts = 1;
+            // behavior and appearance
+            dp.cellMarginBottom = 20;
+
+            var bubble_html = "";
+            dp.bubble = new DayPilot.Bubble({
+                position: "Mouse",
+                animation: "slow",
+                onLoad: function (args) {
+                    var ev = args.source;
+                    var from = new DayPilot.Date(ev.tag("mission_from").toString()).toString("yyyy-MM-dd");
+                    var to = new DayPilot.Date(ev.tag("mission_to").toString()).toString("yyyy-MM-dd");
+                    setcolorOfSameClassAndValue(ev.tag("mission_name").toString());
+
+                    args.html = "<table class='bubbleContainer'>"
+                        + "<tr><td><b> إسم الدورة </b></td><td><b>: </b></td><td>" + ev.text()
+                        + "</td></tr><tr><td><b>  من   </b></td><td><b>: </b></td><td>" + from
+                        + "</td></tr><tr><td><b>  الى  </b></td><td><b>: </b></td><td>" + to
+                        + "</td></tr><tr><td><b>  الضباط المكلفين  </b></td><td><b>: </b></td><td>" + ev.tag("officer")
+                        + "</td></tr><tr><td><b>  القطعة  </b></td><td><b>: </b></td><td>" + ev.tag("mission_tournament_department")
+                        + "</td></tr><tr><td><b>  القاعة  </b></td><td><b>: </b></td><td>" + ev.tag("mission_tournament_room")
+                        + "</td></tr><tr><td><b>  أمر المستند  </b></td><td><b>: </b></td><td>" + ev.tag("mission_tournament_document_order")
+                        + "</td></tr><tr><td><b>  تاريخ التخريج  </b></td><td><b>: </b></td><td>" + ev.tag("mission_tournament_graduation_date")
+                        + "</td></tr></table>";
+                }
+            });
+
+            // view by default current date
+            dp.startDate = get_current_date();
+
+            dp.onEventClicked = function (args) {
+                window.location.href = $("#missionEditUrl a").attr("href") + "/" + args.e.tag("id").trim();
+            };
+
+
+            dp.init();
+
+            $("#monthName").html(DayPilot.Date(dp.startDate).toString("MMMM", locale_name));
+            populate_events_holder(dp, get_current_date());
+
+            var nav = new DayPilot.Navigator("nav");
+
+            nav.showMonths = 3;
+            nav.skipMonths = 3;
+            nav.locale = locale_name;
+            nav.theme = "navigator_green"
+            nav.selectMode = "month";
+            nav.freeHandSelectionEnabled = true;
+
+            nav.onTimeRangeSelected = function (args) {
+                var start_date_nav = args.start;
+                dp.startDate = start_date_nav.toString().toString().trim();
+                populate_events_holder(dp, start_date_nav.toString().trim());
+                dp.update();
+                $("#monthName").html(DayPilot.Date(dp.startDate).toString("MMMM", locale_name));
+            };
+            nav.onBeforeCellRender = function (args) {
+                if (args.cell.isCurrentMonth) {
+                    args.cell.cssClass = "current-month";
+                }
+            };
+            nav.init();
+            $("#download-button").click(function (ev) {
+                ev.preventDefault();
+                dp.exportAs("jpeg", { area: "full" }).download();
+            });
+        })
+
+        function setcolorOfSameClassAndValue(val) {
+            $(document).ready(function () {
+                $('.month_traditional_event_inner').css('background', function (elm) {
+                    var text = $(this).text().trim();
+                    return (text == val.trim() ? 'red' : '');
+                });
+            });
+            
+        }
+
+       $('.TournamentLink').addClass("activelink");
+    </script>
+}

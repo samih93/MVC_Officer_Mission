@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MVC_Officer_Mission.Models.Mission>
+
+@{
+    ViewBag.Title = "GetAjaxData";
+}
+
+<table id="missions_holder" class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="mission_id">
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td class="mission_name">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="mission_from">
+                @Html.DisplayFor(modelItem => item.From)
+            </td>
+            <td class="mission_to">
+                @Html.DisplayFor(modelItem => item.To)
+            </td>
+            <td class="officer">
+                @foreach(var ORIM in item.Tournament.OfficersRolesInMission)
+                {
+                    <span class="officerItem">@ORIM.Officer.FullName - @ORIM.OfficerRole</span>
+                }
+            </td>
+            <td class="mission_tournament_department">
+                @Html.DisplayFor(modelItem => item.Tournament.Department)
+            </td>
+            <td class="mission_tournament_room">
+                @Html.DisplayFor(modelItem => item.Tournament.Room)
+            </td>
+            <td class="mission_tournament_document_order">
+                @Html.DisplayFor(modelItem => item.Tournament.DocumentOrder)
+            </td>
+            <td class="mission_tournament_graduation_date">
+                @Html.DisplayFor(modelItem => item.Tournament.GraduationDate)
+            </td>
+        </tr>
+    }
+
+</table>

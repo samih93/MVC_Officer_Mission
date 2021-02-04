@@ -1,0 +1,282 @@
+﻿@model MVC_Officer_Mission.Models.ViewModels.MissionTournamentViewModel
+@using MVC_Officer_Mission.Models
+
+@{
+    ViewBag.Title = "تعديل مهمة / دورة";
+}
+
+<h2>تعديل</h2>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>مهمة / دورة</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(m => m.Mission.Id)
+        <fieldset>
+            <legend>تفاصيل المهمة /  دورة</legend>
+            <div class="form-group">
+                @Html.Label("MissionName", "إسم " + (string)ViewBag.MissionType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mission.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="hidden">
+                    @Html.LabelFor(model => model.Mission.Istournament, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Mission.Istournament, new { @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Mission.Istournament, "", new { @class = "text-danger isTournament" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mission.From, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.From, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.Mission.From, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Mission.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.To, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.Mission.To, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+
+        @*if is not tournament ( if mohemme )*@
+        @if (!Model.Mission.Istournament)
+        {
+
+            <fieldset class="missionOfficersWrapper">
+                <legend>ضباط المهمة</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Officer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.ListBox("listOfOfficersDDL", (IEnumerable<SelectListItem>)ViewBag.listOfOfficers, new
+                   {
+                       @class = "selectpicker show-menu-arrow",
+                       data_live_search = "true",
+                       data_width = "100%",
+                       multiple = "multiple"
+                   })
+                    </div>
+                </div>
+            </fieldset>
+        }
+        else
+        {
+
+            @Html.HiddenFor(m => m.Tournament.Id)
+            @Html.HiddenFor(m => m.Mission.TournamentID)
+            <div class="tournamentContent">
+                <fieldset>
+                    <legend>معلومات الدورة</legend>
+                    <div class="">
+                        <div class="form-group">
+                            @*الجهة المانحة*@
+                            @Html.LabelFor(model => model.Tournament.Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Tournament.Provider, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tournament.Provider, "", new { @class = "text-danger" })
+                            </div>
+                            @*الجهة المستفيدة*@
+                            @Html.LabelFor(model => model.Tournament.BenefitedSide.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownList("listOfBenefitedSidesDDL", (IEnumerable<SelectListItem>)ViewBag.listOfBenefitedSides, new
+                           {
+                               @class = "form-control selectpicker show-menu-arrow"
+                           })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*أمر المستند*@
+                            @Html.LabelFor(model => model.Tournament.DocumentOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Tournament.DocumentOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tournament.DocumentOrder, "", new { @class = "text-danger" })
+                            </div>
+                            @*القطعة *@
+                            @Html.LabelFor(model => model.Tournament.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Tournament.Department, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tournament.Department, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*القاعة *@
+                            @Html.LabelFor(model => model.Tournament.Room, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Tournament.Room, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Tournament.Room, "", new { @class = "text-danger" })
+                            </div>
+                            @*تاريخ التخريج *@
+                            @Html.LabelFor(model => model.Tournament.GraduationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Tournament.GraduationDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                @Html.ValidationMessageFor(model => model.Tournament.GraduationDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @*ملف أمر المستند*@
+                            @Html.LabelFor(model => model.Tournament.DocumentOrderFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <input type="file" name="DocumentOrderFile" id="DocumentOrderFile" class="form-control" />
+
+                                @{string documentOrderClass = (Model.Tournament != null && !String.IsNullOrEmpty(Model.Tournament.DocumentOrderFile)) ? "" : "hidden";}
+                                <div class="@documentOrderClass">
+                                    <a href="~/Media/TournamentDocumentOrder/@Model.Tournament.DocumentOrderFile" target="_blank">عرض أمر المستند</a>
+                                    @Html.CheckBox("DeleteDocumentOrderFile", false) <label for="DeleteDocumentOrderFile">حذف</label>
+                                    @Html.Hidden("OldDocumentOrderFile", Model.Tournament.DocumentOrderFile)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="f_officerRoleInMission">
+                    <legend>ضباط الدورة</legend>
+                    <table id="officerRoleInMissionWrapper" class="table order-list">
+                        <thead>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.Tournament.OfficersRolesInMission.First().Officer.FullName, htmlAttributes: new { @class = "control-label" })</td>
+                                <td>@Html.LabelFor(model => model.Tournament.OfficersRolesInMission.First().OfficerRole, htmlAttributes: new { @class = "control-label" })</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int index = 0;
+                                foreach (var ORIM in Model.listOfTournamentOfficers)
+                                {
+                                    <tr>
+                                        <td class="col-sm-5">
+                                            @Html.DropDownListFor(m => m.listOfTournamentOfficers[index].OfficerId, (SelectList)(ViewBag.listOfTournamentOfficers[index]), new
+                                       {
+                                           @class = "form-control selectpicker show-menu-arrow tournamentOfficer"
+                                       })
+                                        </td>
+                                        <td class="col-sm-5">
+                                            @*<input type="text" name="OfficerRole" id="OfficerRole{@index}" class="form-control" value="@officerRole" />*@
+                                            @Html.EditorFor(m => m.listOfTournamentOfficers[index].OfficerRole, new { htmlAttributes = new { @Value = ORIM.OfficerRole, @class = "form-control tournamentOfficerMission" } })
+                                        </td>
+                                        @if (index > 0)
+                                        {
+                                            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="حذف"></td>
+                                        }
+                                    </tr>
+                                    index++;
+                                }
+                                //index saved as HiddenFieldPageStatePersister to start from when adding new officers
+                                @Html.Hidden("officersRoleInMissionIndex", index.ToString())
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td colspan="3">
+                                    <input type="button" class="btn btn-lg btn-block text-center" id="addrow" value="إضافة ضابط ووظيفته" />
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr></tr>
+                        </tfoot>
+                    </table>
+                </fieldset>
+            </div>
+                                }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="تعديل" class="btn btn-lg btn-primary" />
+            </div>
+        </div>
+    </div>
+                                }
+
+<div>
+    @Html.ActionLink("الرجوع إلى القائمة", "Index", "", new { @class = "action_link" })
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/bootstrap-selectpicker")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap-selectpicker")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var counter = $("#officersRoleInMissionIndex").val();
+        $("#addrow").on("click", function () {
+            var newRow = $("<tr>");
+
+            var selectListId = "listOfTournamentOfficers_0__OfficerId";
+            var selectListItems = $('#' + selectListId).html();
+
+            var newSelectListId = selectListId + counter.toString();
+
+            //new selectlist properties name and id
+            var newSelectListName = "listOfTournamentOfficers[" + counter.toString() + "].OfficerId";
+
+            //new input text role name and id
+            var NewOfficerRoleId = "listOfTournamentOfficers_" + counter.toString() + "__OfficerRole";
+            var NewOfficerRoleName = "listOfTournamentOfficers[" + counter.toString() + "].OfficerRole";
+
+
+            var cols = "";
+
+            cols += '<td><select class="form-control tournamentOfficer" name="' + newSelectListName + '" id="' + newSelectListId + '"' + selectListItems + '</select></td>';
+            cols += '<td><input class="form-control tournamentOfficerMission" name="' + NewOfficerRoleName + '" id="' + NewOfficerRoleId + '" type="text" /></td>';
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="حذف"></td>';
+
+            newRow.append(cols);
+            $("table.order-list").append(newRow);
+
+            $('#' + newSelectListId).selectpicker({
+                liveSearch: true,
+                showSubtext: true,
+
+            });
+
+            counter++;
+            return false;
+        });
+
+        $("table.order-list").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            counter -= 1;
+
+            $("select.tournamentOfficer").each(function (index) {
+                //new input text role name and id
+                var selectListId = "listOfTournamentOfficers_0__OfficerId";
+                var newSelectListId = selectListId;
+                if (index > 0) {
+                    newSelectListId += index;
+                }
+                var newSelectListName = "listOfTournamentOfficers[" + index.toString() + "].OfficerId";
+                $(this).attr("id", newSelectListId);
+                $(this).attr("name", newSelectListName);
+            })
+
+            $("input.tournamentOfficerMission").each(function (index) {
+                //new input text role name and id
+                var NewOfficerRoleId = "listOfTournamentOfficers_" + index.toString() + "__OfficerRole";
+                var NewOfficerRoleName = "listOfTournamentOfficers[" + index.toString() + "].OfficerRole";
+                $(this).attr("id", NewOfficerRoleId);
+                $(this).attr("name", NewOfficerRoleName);
+            })
+
+        });
+
+    </script>
+}

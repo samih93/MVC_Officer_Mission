@@ -1,0 +1,1029 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{662C30AC-7F41-4038-B960-934DEFF8045E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVC_Officer_Mission</RootNamespace>
+    <AssemblyName>MVC_Officer_Mission</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
+    <Compile Include="Controllers\GlobalController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MissionsController.cs" />
+    <Compile Include="Controllers\OfficersController.cs" />
+    <Compile Include="Controllers\SpecificationsController.cs" />
+    <Compile Include="Controllers\TournamentsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811091015447_Initial.cs" />
+    <Compile Include="Migrations\201811091015447_Initial.Designer.cs">
+      <DependentUpon>201811091015447_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811130659254_AddTournament.cs" />
+    <Compile Include="Migrations\201811130659254_AddTournament.Designer.cs">
+      <DependentUpon>201811130659254_AddTournament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811131023478_AddForeignKeyMissions.cs" />
+    <Compile Include="Migrations\201811131023478_AddForeignKeyMissions.Designer.cs">
+      <DependentUpon>201811131023478_AddForeignKeyMissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811131048590_TournamentGraduationDateToString.cs" />
+    <Compile Include="Migrations\201811131048590_TournamentGraduationDateToString.Designer.cs">
+      <DependentUpon>201811131048590_TournamentGraduationDateToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811131050322_NonRequiredTournamentID.cs" />
+    <Compile Include="Migrations\201811131050322_NonRequiredTournamentID.Designer.cs">
+      <DependentUpon>201811131050322_NonRequiredTournamentID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811150934547_AddDisplayNames.cs" />
+    <Compile Include="Migrations\201811150934547_AddDisplayNames.Designer.cs">
+      <DependentUpon>201811150934547_AddDisplayNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811151034438_addrequiredattribut.cs" />
+    <Compile Include="Migrations\201811151034438_addrequiredattribut.Designer.cs">
+      <DependentUpon>201811151034438_addrequiredattribut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811160822019_AdddisplayNameOfOfficer.cs" />
+    <Compile Include="Migrations\201811160822019_AdddisplayNameOfOfficer.Designer.cs">
+      <DependentUpon>201811160822019_AdddisplayNameOfOfficer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811211029207_AddDisplayFormatToDate.cs" />
+    <Compile Include="Migrations\201811211029207_AddDisplayFormatToDate.Designer.cs">
+      <DependentUpon>201811211029207_AddDisplayFormatToDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811260647374_RefreshModels.cs" />
+    <Compile Include="Migrations\201811260647374_RefreshModels.Designer.cs">
+      <DependentUpon>201811260647374_RefreshModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811260648432_RefreshModels1.cs" />
+    <Compile Include="Migrations\201811260648432_RefreshModels1.Designer.cs">
+      <DependentUpon>201811260648432_RefreshModels1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811260658170_TournamentGraduationDateNotRequired.cs" />
+    <Compile Include="Migrations\201811260658170_TournamentGraduationDateNotRequired.Designer.cs">
+      <DependentUpon>201811260658170_TournamentGraduationDateNotRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811281324108_changedisplayformat_of_date.cs" />
+    <Compile Include="Migrations\201811281324108_changedisplayformat_of_date.Designer.cs">
+      <DependentUpon>201811281324108_changedisplayformat_of_date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811300612334_AddOfficerFullName.cs" />
+    <Compile Include="Migrations\201811300612334_AddOfficerFullName.Designer.cs">
+      <DependentUpon>201811300612334_AddOfficerFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811300614218_AddOfficerFullNameWithLastName.cs" />
+    <Compile Include="Migrations\201811300614218_AddOfficerFullNameWithLastName.Designer.cs">
+      <DependentUpon>201811300614218_AddOfficerFullNameWithLastName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812140636592_CaptainUpdate1.cs" />
+    <Compile Include="Migrations\201812140636592_CaptainUpdate1.Designer.cs">
+      <DependentUpon>201812140636592_CaptainUpdate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812140813492_CaptainUpdate2.cs" />
+    <Compile Include="Migrations\201812140813492_CaptainUpdate2.Designer.cs">
+      <DependentUpon>201812140813492_CaptainUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812140952003_CaptainUpdate3.cs" />
+    <Compile Include="Migrations\201812140952003_CaptainUpdate3.Designer.cs">
+      <DependentUpon>201812140952003_CaptainUpdate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812141038558_CaptainUpdate4.cs" />
+    <Compile Include="Migrations\201812141038558_CaptainUpdate4.Designer.cs">
+      <DependentUpon>201812141038558_CaptainUpdate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901020838325_OfficerProfileChanges.cs" />
+    <Compile Include="Migrations\201901020838325_OfficerProfileChanges.Designer.cs">
+      <DependentUpon>201901020838325_OfficerProfileChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901020940472_OfficerProfileUpdate.cs" />
+    <Compile Include="Migrations\201901020940472_OfficerProfileUpdate.Designer.cs">
+      <DependentUpon>201901020940472_OfficerProfileUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901020942099_OfficerProfileUpdate1.cs" />
+    <Compile Include="Migrations\201901020942099_OfficerProfileUpdate1.Designer.cs">
+      <DependentUpon>201901020942099_OfficerProfileUpdate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901020945367_OfficerProfileUpdate2.cs" />
+    <Compile Include="Migrations\201901020945367_OfficerProfileUpdate2.Designer.cs">
+      <DependentUpon>201901020945367_OfficerProfileUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021016406_OfficerProfileUpdate3.cs" />
+    <Compile Include="Migrations\201901021016406_OfficerProfileUpdate3.Designer.cs">
+      <DependentUpon>201901021016406_OfficerProfileUpdate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021018172_OfficerProfileUpdate4.cs" />
+    <Compile Include="Migrations\201901021018172_OfficerProfileUpdate4.Designer.cs">
+      <DependentUpon>201901021018172_OfficerProfileUpdate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021026304_OfficerProfileUpdate5.cs" />
+    <Compile Include="Migrations\201901021026304_OfficerProfileUpdate5.Designer.cs">
+      <DependentUpon>201901021026304_OfficerProfileUpdate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021053266_OfficerProfileUpdate6.cs" />
+    <Compile Include="Migrations\201901021053266_OfficerProfileUpdate6.Designer.cs">
+      <DependentUpon>201901021053266_OfficerProfileUpdate6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021121548_OfficerProfileUpdate7.cs" />
+    <Compile Include="Migrations\201901021121548_OfficerProfileUpdate7.Designer.cs">
+      <DependentUpon>201901021121548_OfficerProfileUpdate7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021124394_OfficerProfileUpdate8.cs" />
+    <Compile Include="Migrations\201901021124394_OfficerProfileUpdate8.Designer.cs">
+      <DependentUpon>201901021124394_OfficerProfileUpdate8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021131315_OfficerProfileUpdate9.cs" />
+    <Compile Include="Migrations\201901021131315_OfficerProfileUpdate9.Designer.cs">
+      <DependentUpon>201901021131315_OfficerProfileUpdate9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021133392_OfficerProfileUpdate10.cs" />
+    <Compile Include="Migrations\201901021133392_OfficerProfileUpdate10.Designer.cs">
+      <DependentUpon>201901021133392_OfficerProfileUpdate10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021135138_OfficerProfileUpdate11.cs" />
+    <Compile Include="Migrations\201901021135138_OfficerProfileUpdate11.Designer.cs">
+      <DependentUpon>201901021135138_OfficerProfileUpdate11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021136314_OfficerProfileUpdate12.cs" />
+    <Compile Include="Migrations\201901021136314_OfficerProfileUpdate12.Designer.cs">
+      <DependentUpon>201901021136314_OfficerProfileUpdate12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021138370_OfficerProfileUpdate13.cs" />
+    <Compile Include="Migrations\201901021138370_OfficerProfileUpdate13.Designer.cs">
+      <DependentUpon>201901021138370_OfficerProfileUpdate13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021139397_OfficerProfileUpdate14.cs" />
+    <Compile Include="Migrations\201901021139397_OfficerProfileUpdate14.Designer.cs">
+      <DependentUpon>201901021139397_OfficerProfileUpdate14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021143123_OfficerProfileUpdate15.cs" />
+    <Compile Include="Migrations\201901021143123_OfficerProfileUpdate15.Designer.cs">
+      <DependentUpon>201901021143123_OfficerProfileUpdate15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021147505_OfficerProfileUpdate16.cs" />
+    <Compile Include="Migrations\201901021147505_OfficerProfileUpdate16.Designer.cs">
+      <DependentUpon>201901021147505_OfficerProfileUpdate16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021150154_OfficerProfileUpdate17.cs" />
+    <Compile Include="Migrations\201901021150154_OfficerProfileUpdate17.Designer.cs">
+      <DependentUpon>201901021150154_OfficerProfileUpdate17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901040642365_OfficerProfileUpdate18.cs" />
+    <Compile Include="Migrations\201901040642365_OfficerProfileUpdate18.Designer.cs">
+      <DependentUpon>201901040642365_OfficerProfileUpdate18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901040704098_OfficerProfileUpdate19.cs" />
+    <Compile Include="Migrations\201901040704098_OfficerProfileUpdate19.Designer.cs">
+      <DependentUpon>201901040704098_OfficerProfileUpdate19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080753560_OfficerUpdateprofile20.cs" />
+    <Compile Include="Migrations\201901080753560_OfficerUpdateprofile20.Designer.cs">
+      <DependentUpon>201901080753560_OfficerUpdateprofile20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901090932581_OfficerUpdate21.cs" />
+    <Compile Include="Migrations\201901090932581_OfficerUpdate21.Designer.cs">
+      <DependentUpon>201901090932581_OfficerUpdate21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901151227072_TournamentAddMissionVirtual.cs" />
+    <Compile Include="Migrations\201901151227072_TournamentAddMissionVirtual.Designer.cs">
+      <DependentUpon>201901151227072_TournamentAddMissionVirtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901300659262_UpdateSpecifications.cs" />
+    <Compile Include="Migrations\201901300659262_UpdateSpecifications.Designer.cs">
+      <DependentUpon>201901300659262_UpdateSpecifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901310629496_AddNameForUser.cs" />
+    <Compile Include="Migrations\201901310629496_AddNameForUser.Designer.cs">
+      <DependentUpon>201901310629496_AddNameForUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901310740242_AddMilitaryNumber.cs" />
+    <Compile Include="Migrations\201901310740242_AddMilitaryNumber.Designer.cs">
+      <DependentUpon>201901310740242_AddMilitaryNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904030835354_AddMissionLog.cs" />
+    <Compile Include="Migrations\201904030835354_AddMissionLog.Designer.cs">
+      <DependentUpon>201904030835354_AddMissionLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904160601517_AddOfficerIsInInstituteField.cs" />
+    <Compile Include="Migrations\201904160601517_AddOfficerIsInInstituteField.Designer.cs">
+      <DependentUpon>201904160601517_AddOfficerIsInInstituteField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905140957011_AddMissionNameTolog.cs" />
+    <Compile Include="Migrations\201905140957011_AddMissionNameTolog.Designer.cs">
+      <DependentUpon>201905140957011_AddMissionNameTolog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905141026496_removeMissionModelFromLog.cs" />
+    <Compile Include="Migrations\201905141026496_removeMissionModelFromLog.Designer.cs">
+      <DependentUpon>201905141026496_removeMissionModelFromLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BenefitedSide.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\EntityModels\CountEntity.cs" />
+    <Compile Include="Models\ExternalTournament.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MessagingSystem.cs" />
+    <Compile Include="Models\Mission.cs" />
+    <Compile Include="Models\MissionLog.cs" />
+    <Compile Include="Models\Officer.cs" />
+    <Compile Include="Models\OfficerRole.cs" />
+    <Compile Include="Models\OfficerRoleInMission.cs" />
+    <Compile Include="Models\Rank.cs" />
+    <Compile Include="Models\Specification.cs" />
+    <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\ViewModels\MissionTournamentViewModel.cs" />
+    <Compile Include="Models\ViewModels\OfficerViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserRoleViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\demo.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\elements.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\elements\calendar_silver_allday30.gif" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\btn\all.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\header-in.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\header.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\calendar-270x150.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\gantt-270x150.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\kanban-270x150.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\month-270x150.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\scheduler-270x150.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\li.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\main.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\shadow.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\tab-left.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\tab-right.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\toolbar2.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\linked\gradient_dps.jpg" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\linked\gradient_hard_left.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\linked\tentative5x8.gif" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\areas.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\areas\icons.png" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_blue.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_g.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_green.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_traditional.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_transparent.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\calendar_white.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\gantt_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\kanban_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_blue.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_g.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_green.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_traditional.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_transparent.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\month_white.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_8.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_blue.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_g.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_green.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_transparent.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\navigator_white.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_8.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_blue.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_default_2014.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_green.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_traditional.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_transparent.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\scheduler_white.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\timetable_big.css" />
+    <Content Include="Content\Lib\DailyPilotCalendar\js\daypilot-all.min.js" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\Lib\BootstrapSelect\css\bootstrap-select.css" />
+    <Content Include="Content\Lib\BootstrapSelect\css\bootstrap-select.min.css" />
+    <Content Include="Content\Lib\BootstrapSelect\js\bootstrap-select.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\bootstrap-select.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ar_AR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ar_AR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-bg_BG.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-bg_BG.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-cs_CZ.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-cs_CZ.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-da_DK.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-da_DK.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-de_DE.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-de_DE.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-en_US.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-en_US.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-es_CL.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-es_CL.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-es_ES.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-es_ES.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-et_EE.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-et_EE.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-eu.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-eu.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fa_IR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fa_IR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fi_FI.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fi_FI.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fr_FR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-fr_FR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-hr_HR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-hr_HR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-hu_HU.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-hu_HU.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-id_ID.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-id_ID.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-it_IT.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-it_IT.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ja_JP.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ja_JP.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-kh_KM.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-kh_KM.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ko_KR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ko_KR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-lt_LT.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-lt_LT.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-nb_NO.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-nb_NO.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-nl_NL.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-nl_NL.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pl_PL.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pl_PL.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pt_BR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pt_BR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pt_PT.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-pt_PT.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ro_RO.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ro_RO.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ru_RU.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ru_RU.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sk_SK.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sk_SK.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sl_SI.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sl_SI.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sv_SE.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-sv_SE.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-tr_TR.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-tr_TR.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ua_UA.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-ua_UA.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-vi_VN.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-vi_VN.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-zh_CN.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-zh_CN.min.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-zh_TW.js" />
+    <Content Include="Content\Lib\BootstrapSelect\js\i18n\defaults-zh_TW.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.bootstrap.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.bootstrap4.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.dataTables.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.dataTables.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.foundation.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.foundation.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.jqueryui.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.semanticui.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\buttons.semanticui.min.css" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.bootstrap.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.bootstrap.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.bootstrap4.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.bootstrap4.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.colVis.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.colVis.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.flash.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.flash.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.foundation.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.foundation.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.html5.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.html5.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.jqueryui.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.jqueryui.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.print.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.print.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.semanticui.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\buttons.semanticui.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\dataTables.buttons.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\js\dataTables.buttons.min.js" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\swf\flashExport.swf" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.foundation.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\css\jquery.dataTables.min.css" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\images\sort_asc.png" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\images\sort_asc_disabled.png" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\images\sort_both.png" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\images\sort_desc.png" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\images\sort_desc_disabled.png" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.foundation.min.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.js" />
+    <Content Include="Content\Lib\DataTables\DataTables-1.10.18\js\jquery.dataTables.min.js" />
+    <Content Include="Content\Lib\DataTables\datatables.css" />
+    <Content Include="Content\Lib\DataTables\datatables.js" />
+    <Content Include="Content\Lib\DataTables\datatables.min.css" />
+    <Content Include="Content\Lib\DataTables\datatables.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.bootstrap.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.bootstrap4.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.dataTables.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.dataTables.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.foundation.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.foundation.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.jqueryui.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.semanticui.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\css\responsive.semanticui.min.css" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\dataTables.responsive.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\dataTables.responsive.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.bootstrap.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.bootstrap.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.bootstrap4.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.bootstrap4.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.foundation.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.foundation.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.jqueryui.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.jqueryui.min.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.semanticui.js" />
+    <Content Include="Content\Lib\DataTables\Responsive-2.2.2\js\responsive.semanticui.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.bootstrap.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.bootstrap4.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.dataTables.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.dataTables.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.foundation.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.foundation.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.jqueryui.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.semanticui.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\css\scroller.semanticui.min.css" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\dataTables.scroller.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\dataTables.scroller.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.bootstrap.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.bootstrap.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.bootstrap4.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.bootstrap4.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.dataTables.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.foundation.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.foundation.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.jqueryui.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.jqueryui.min.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.semanicui.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.semanticui.js" />
+    <Content Include="Content\Lib\DataTables\Scroller-1.5.0\js\scroller.semanticui.min.js" />
+    <Content Include="Content\Lib\fancybox-master\dist\jquery.fancybox.css" />
+    <Content Include="Content\Lib\fancybox-master\dist\jquery.fancybox.js" />
+    <Content Include="Content\Lib\fancybox-master\dist\jquery.fancybox.min.css" />
+    <Content Include="Content\Lib\fancybox-master\dist\jquery.fancybox.min.js" />
+    <Content Include="Content\Lib\fancybox-master\docs\index.html" />
+    <Content Include="Content\Lib\fancybox-master\gulpfile.js" />
+    <Content Include="Content\Lib\fancybox-master\src\css\core.css" />
+    <Content Include="Content\Lib\fancybox-master\src\css\fullscreen.css" />
+    <Content Include="Content\Lib\fancybox-master\src\css\share.css" />
+    <Content Include="Content\Lib\fancybox-master\src\css\slideshow.css" />
+    <Content Include="Content\Lib\fancybox-master\src\css\thumbs.css" />
+    <Content Include="Content\Lib\fancybox-master\src\js\core.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\fullscreen.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\guestures.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\hash.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\media.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\share.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\slideshow.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\thumbs.js" />
+    <Content Include="Content\Lib\fancybox-master\src\js\wheel.js" />
+    <Content Include="Media\ma3had.png" />
+    <Content Include="Media\officer_favicon.jpg" />
+    <Content Include="Media\OfficersProfileImages\DefaultOfficerProfileImage_Main.jpg" />
+    <Content Include="Media\OfficersProfileImages\DefaultOfficerProfileImage.jpg" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Lib\BootstrapSelect\css\bootstrap-select.css.map" />
+    <Content Include="Content\Lib\BootstrapSelect\js\bootstrap-select.js.map" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\elements\Thumbs.db" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\layout\home\Thumbs.db" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\media\linked\Thumbs.db" />
+    <Content Include="Content\Lib\DailyPilotCalendar\css\themes\areas\Thumbs.db" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\common.scss" />
+    <Content Include="Content\Lib\DataTables\Buttons-1.5.4\css\mixins.scss" />
+    <Content Include="Content\Lib\fancybox-master\.gitignore" />
+    <Content Include="Content\Lib\fancybox-master\bower.json" />
+    <Content Include="Content\Lib\fancybox-master\package.json" />
+    <Content Include="Content\Lib\fancybox-master\README.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\function.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Missions\Create.cshtml" />
+    <Content Include="Views\Missions\Delete.cshtml" />
+    <Content Include="Views\Missions\Edit.cshtml" />
+    <Content Include="Views\Missions\Index.cshtml" />
+    <Content Include="Views\Tournaments\Index.cshtml" />
+    <Content Include="Views\Shared\_AjaxLayout.cshtml" />
+    <Content Include="Views\Missions\Calendar_M_AND_T.cshtml" />
+    <Content Include="Views\Specifications\Create.cshtml" />
+    <Content Include="Views\Specifications\Edit.cshtml" />
+    <Content Include="Views\Specifications\Index.cshtml" />
+    <Content Include="Views\Officers\Create.cshtml" />
+    <Content Include="Views\Officers\Delete.cshtml" />
+    <Content Include="Views\Officers\Details.cshtml" />
+    <Content Include="Views\Officers\Edit.cshtml" />
+    <Content Include="Views\Officers\Index.cshtml" />
+    <Content Include="Views\Missions\AjaxOfficerTournamentDetails.cshtml" />
+    <Content Include="Views\Missions\GetAjaxData.cshtml" />
+    <Content Include="Views\Tournaments\Details.cshtml" />
+    <Content Include="Views\Administration\ListOfRoles.cshtml" />
+    <Content Include="Views\Administration\EditUserInRole.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Media\TournamentDocumentOrder\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Global\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811091015447_Initial.resx">
+      <DependentUpon>201811091015447_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811130659254_AddTournament.resx">
+      <DependentUpon>201811130659254_AddTournament.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131023478_AddForeignKeyMissions.resx">
+      <DependentUpon>201811131023478_AddForeignKeyMissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131048590_TournamentGraduationDateToString.resx">
+      <DependentUpon>201811131048590_TournamentGraduationDateToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131050322_NonRequiredTournamentID.resx">
+      <DependentUpon>201811131050322_NonRequiredTournamentID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811150934547_AddDisplayNames.resx">
+      <DependentUpon>201811150934547_AddDisplayNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811151034438_addrequiredattribut.resx">
+      <DependentUpon>201811151034438_addrequiredattribut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811160822019_AdddisplayNameOfOfficer.resx">
+      <DependentUpon>201811160822019_AdddisplayNameOfOfficer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811211029207_AddDisplayFormatToDate.resx">
+      <DependentUpon>201811211029207_AddDisplayFormatToDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811260647374_RefreshModels.resx">
+      <DependentUpon>201811260647374_RefreshModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811260648432_RefreshModels1.resx">
+      <DependentUpon>201811260648432_RefreshModels1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811260658170_TournamentGraduationDateNotRequired.resx">
+      <DependentUpon>201811260658170_TournamentGraduationDateNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811281324108_changedisplayformat_of_date.resx">
+      <DependentUpon>201811281324108_changedisplayformat_of_date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811300612334_AddOfficerFullName.resx">
+      <DependentUpon>201811300612334_AddOfficerFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811300614218_AddOfficerFullNameWithLastName.resx">
+      <DependentUpon>201811300614218_AddOfficerFullNameWithLastName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812140636592_CaptainUpdate1.resx">
+      <DependentUpon>201812140636592_CaptainUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812140813492_CaptainUpdate2.resx">
+      <DependentUpon>201812140813492_CaptainUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812140952003_CaptainUpdate3.resx">
+      <DependentUpon>201812140952003_CaptainUpdate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812141038558_CaptainUpdate4.resx">
+      <DependentUpon>201812141038558_CaptainUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901020838325_OfficerProfileChanges.resx">
+      <DependentUpon>201901020838325_OfficerProfileChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901020940472_OfficerProfileUpdate.resx">
+      <DependentUpon>201901020940472_OfficerProfileUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901020942099_OfficerProfileUpdate1.resx">
+      <DependentUpon>201901020942099_OfficerProfileUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901020945367_OfficerProfileUpdate2.resx">
+      <DependentUpon>201901020945367_OfficerProfileUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021016406_OfficerProfileUpdate3.resx">
+      <DependentUpon>201901021016406_OfficerProfileUpdate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021018172_OfficerProfileUpdate4.resx">
+      <DependentUpon>201901021018172_OfficerProfileUpdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021026304_OfficerProfileUpdate5.resx">
+      <DependentUpon>201901021026304_OfficerProfileUpdate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021053266_OfficerProfileUpdate6.resx">
+      <DependentUpon>201901021053266_OfficerProfileUpdate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021121548_OfficerProfileUpdate7.resx">
+      <DependentUpon>201901021121548_OfficerProfileUpdate7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021124394_OfficerProfileUpdate8.resx">
+      <DependentUpon>201901021124394_OfficerProfileUpdate8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021131315_OfficerProfileUpdate9.resx">
+      <DependentUpon>201901021131315_OfficerProfileUpdate9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021133392_OfficerProfileUpdate10.resx">
+      <DependentUpon>201901021133392_OfficerProfileUpdate10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021135138_OfficerProfileUpdate11.resx">
+      <DependentUpon>201901021135138_OfficerProfileUpdate11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021136314_OfficerProfileUpdate12.resx">
+      <DependentUpon>201901021136314_OfficerProfileUpdate12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021138370_OfficerProfileUpdate13.resx">
+      <DependentUpon>201901021138370_OfficerProfileUpdate13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021139397_OfficerProfileUpdate14.resx">
+      <DependentUpon>201901021139397_OfficerProfileUpdate14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021143123_OfficerProfileUpdate15.resx">
+      <DependentUpon>201901021143123_OfficerProfileUpdate15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021147505_OfficerProfileUpdate16.resx">
+      <DependentUpon>201901021147505_OfficerProfileUpdate16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021150154_OfficerProfileUpdate17.resx">
+      <DependentUpon>201901021150154_OfficerProfileUpdate17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901040642365_OfficerProfileUpdate18.resx">
+      <DependentUpon>201901040642365_OfficerProfileUpdate18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901040704098_OfficerProfileUpdate19.resx">
+      <DependentUpon>201901040704098_OfficerProfileUpdate19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080753560_OfficerUpdateprofile20.resx">
+      <DependentUpon>201901080753560_OfficerUpdateprofile20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090932581_OfficerUpdate21.resx">
+      <DependentUpon>201901090932581_OfficerUpdate21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901151227072_TournamentAddMissionVirtual.resx">
+      <DependentUpon>201901151227072_TournamentAddMissionVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901300659262_UpdateSpecifications.resx">
+      <DependentUpon>201901300659262_UpdateSpecifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901310629496_AddNameForUser.resx">
+      <DependentUpon>201901310629496_AddNameForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901310740242_AddMilitaryNumber.resx">
+      <DependentUpon>201901310740242_AddMilitaryNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904030835354_AddMissionLog.resx">
+      <DependentUpon>201904030835354_AddMissionLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904160601517_AddOfficerIsInInstituteField.resx">
+      <DependentUpon>201904160601517_AddOfficerIsInInstituteField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905140957011_AddMissionNameTolog.resx">
+      <DependentUpon>201905140957011_AddMissionNameTolog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905141026496_removeMissionModelFromLog.resx">
+      <DependentUpon>201905141026496_removeMissionModelFromLog.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64811</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:64811/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

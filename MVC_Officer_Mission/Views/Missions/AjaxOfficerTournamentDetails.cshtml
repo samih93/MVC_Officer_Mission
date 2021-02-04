@@ -1,0 +1,56 @@
+﻿@model MVC_Officer_Mission.Models.Mission
+@{
+    ViewBag.Title = "OfficerTournaments";
+}
+
+
+@if (Model != null)
+{
+    <div class="OfficerTournamentDetails rtlDir">
+        <table class="missionPopupData">
+            <tr>
+                <td>اسم الدورة</td>
+                <td> : </td>
+                <td><text id="mission_name">@Model.Name</text></td>
+            </tr>
+            <tr>
+                <td>من</td>
+                <td> : </td>
+                <td><text id="from">@Model.From.ToString("yyy-MM-dd")</text></td>
+            </tr>
+            <tr>
+                <td>الى</td>
+                <td> : </td>
+                <td><text id="to">@Model.To.ToString("yyy-MM-dd")</text></td>
+            </tr>
+            @{
+                string grad_date = Model.Tournament.GraduationDate.HasValue ? @Model.Tournament.GraduationDate.Value.ToString("yyy-MM-dd") : "";
+            }
+            <tr>
+                <td>القطعة</td>
+                <td> : </td>
+                <td><text id="dep">@Model.Tournament.Department</text></td>
+            </tr>
+            <tr>
+                <td>القاعة</td>
+                <td> : </td>
+                <td><text id="room">@Model.Tournament.Room</text></td>
+            </tr>
+            <tr>
+                <td>امر المستند</td>
+                <td> : </td>
+                <td><text id="doc_order">@Model.Tournament.DocumentOrder</text></td>
+            </tr>
+            <tr>
+                <td>تاريخ التخريج</td>
+                <td> : </td>
+                <td><text id="mission_Date">@grad_date</text></td>
+            </tr>
+            <tr>
+                <td> الجهة المانحة</td>
+                <td> : </td>
+                <td><text id="mission_Date">@Model.Tournament.Provider</text></td>
+            </tr>
+        </table>
+    </div>
+                }

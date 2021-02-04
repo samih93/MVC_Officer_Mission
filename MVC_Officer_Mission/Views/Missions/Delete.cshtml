@@ -1,0 +1,55 @@
+﻿@model MVC_Officer_Mission.Models.Mission
+
+@{
+    ViewBag.Title = "حذف مهمة / دورة";
+}
+
+<h2>حذف</h2>
+
+<h3>هل انت متأكد من حذف الدورة / المهمة</h3>
+<div>
+    <h4>مهمة / دورة</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Istournament)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Istournament)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("الرجوع إلى القائمة", "Index", "", new { @class = "action_link" })
+        </div>
+    }
+</div>

@@ -1,0 +1,304 @@
+﻿@model MVC_Officer_Mission.Models.ViewModels.MissionTournamentViewModel
+@using MVC_Officer_Mission.Models
+
+
+
+<h2>إضافة</h2>
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    var mission_kind = "";
+    var legend_title = "";
+    var legend_officer_mission_title = "";
+    var mission_title_name = "";
+
+    mission_kind = User.Identity.Name == "kalam-adid@isf.com" ? "مأذونية" : "مهمة / دورة";
+    legend_title = User.Identity.Name == "kalam-adid@isf.com" ? "تفاصيل المأذونية" : "تفاصيل المهمة /  دورة";
+    legend_officer_mission_title = User.Identity.Name == "kalam-adid@isf.com" ? "الضباط المأذونين" : "ضباط المهمة";
+    mission_title_name = User.Identity.Name == "kalam-adid@isf.com" ? "اسم المأذونية" : "اسم المهمة";
+    ViewBag.Title = "اضافة " + mission_kind;
+
+    if (@Request.IsAuthenticated && User.IsInRole("standard"))
+    // if admin
+    {
+    }
+
+    <div class="form-horizontal">
+        <h4>@mission_kind</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <fieldset>
+            <legend>@legend_title</legend>
+            <div class="form-group">
+                @Html.Label(mission_title_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Mission.Name, "", new { @class = "text-danger" })
+                </div>
+                @if (@Request.IsAuthenticated && User.IsInRole("admin") && !User.Identity.Name.Equals("kalam-khedme@isf.com"))
+                {
+                    @Html.LabelFor(model => model.Mission.Istournament, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Mission.Istournament)
+                            @Html.ValidationMessageFor(model => model.Mission.Istournament, "", new { @class = "text-danger isTournament" })
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mission.From, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.From, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.Mission.From, null, new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Mission.To, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Mission.To, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.Mission.To, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="missionOfficersWrapper">
+            <legend>@legend_officer_mission_title</legend>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.ListBox("listOfOfficersDDL", (IEnumerable<SelectListItem>)ViewBag.listOfOfficers, new
+               {
+                   @class = "selectpicker show-menu-arrow",
+                   data_live_search = "true",
+                   data_width = "100%",
+                   multiple = "multiple"
+               })
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="tournamentContent">
+            <fieldset>
+                <legend>معلومات الدورة</legend>
+                <div class="">
+                    <div class="form-group">
+                        @*الجهة المانحة*@
+                        @Html.LabelFor(model => model.Tournament.Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tournament.Provider, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tournament.Provider, "", new { @class = "text-danger" })
+                        </div>
+                        @*الجهة المستفيدة*@
+                        @Html.LabelFor(model => model.Tournament.BenefitedSide.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("listOfBenefitedSides", (IEnumerable<SelectListItem>)ViewBag.listOfBenefitedSides, new
+                       {
+                           @class = "form-control selectpicker show-menu-arrow"
+                       })
+                            @*@Html.ValidationMessageFor(model => model.Mission.Officers, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @*أمر المستند*@
+                        @Html.LabelFor(model => model.Tournament.DocumentOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tournament.DocumentOrder, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tournament.DocumentOrder, "", new { @class = "text-danger" })
+                        </div>
+                        @*القطعة *@
+                        @Html.LabelFor(model => model.Tournament.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tournament.Department, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tournament.Department, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @*القاعة *@
+                        @Html.LabelFor(model => model.Tournament.Room, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tournament.Room, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Tournament.Room, "", new { @class = "text-danger" })
+                        </div>
+                        @*تاريخ التخريج *@
+                        @Html.LabelFor(model => model.Tournament.GraduationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Tournament.GraduationDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                            @Html.ValidationMessageFor(model => model.Tournament.GraduationDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*ملف أمر المستند*@
+                        @Html.LabelFor(model => model.Tournament.DocumentOrderFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <input type="file" name="DocumentOrderFile" id="DocumentOrderFile" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="f_officerRoleInMission">
+                <legend>ضباط الدورة</legend>
+                <table id="officerRoleInMissionWrapper" class="table order-list">
+                    <thead>
+                        <tr>
+                            <td>@Html.LabelFor(model => model.Tournament.OfficersRolesInMission.First().Officer.FullName, htmlAttributes: new { @class = "control-label" })</td>
+                            <td>@Html.LabelFor(model => model.Tournament.OfficersRolesInMission.First().OfficerRole, htmlAttributes: new { @class = "control-label" })</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*if post sent and there is an error*@
+                        @if (Request.HttpMethod == "POST")
+                        {
+                            int index = 0;
+                            foreach (var ORIM in Model.listOfTournamentOfficers)
+                            {
+                                //var selectList = ((List<SelectList>)ViewData["OfficerRoleInMissionListDDLS"])[index];
+                                //var officerRole = (((List<OfficerRoleInMission>)ViewData["OfficerRoleInMissionList"])[index]).OfficerRole;
+
+                                <tr>
+                                    <td class="col-sm-5">
+                                        @Html.DropDownListFor(m => m.listOfTournamentOfficers[index].OfficerId, (SelectList)(ViewBag.listOfTournamentOfficers[index]), new
+                                   {
+                                       @class = "form-control selectpicker show-menu-arrow tournamentOfficer"
+                                   })
+                                    </td>
+                                    <td class="col-sm-5">
+                                        @*<input type="text" name="OfficerRole" id="OfficerRole{@index}" class="form-control" value="@officerRole" />*@
+                                        @Html.EditorFor(m => m.listOfTournamentOfficers[index].OfficerRole, new { htmlAttributes = new { @Value = ORIM.OfficerRole, @class = "form-control tournamentOfficerMission" } })
+                                    </td>
+                                    @if (index > 0)
+                                    {
+                                        <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="حذف"></td>
+                                    }
+                                </tr>
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="col-sm-5">
+                                    @Html.DropDownListFor(m => m.listOfTournamentOfficers[0].OfficerId, (IEnumerable<SelectListItem>)ViewBag.listOfTournamentOfficers, new
+                               {
+                                   @class = "form-control selectpicker show-menu-arrow tournamentOfficer",
+                                   data_width = "100%"
+                               })
+                                </td>
+                                <td class="col-sm-5">
+                                    @Html.EditorFor(m => m.listOfTournamentOfficers[0].OfficerRole, new { htmlAttributes = new { @class = "form-control tournamentOfficerMission" } })
+                                    @*<input type="text" name="OfficerRole" id="OfficerRole" class="form-control" />*@
+                                </td>
+                                <td class="col-sm-2">
+                                    <a class="deleteRow"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="3">
+                                <input type="button" class="btn btn-lg btn-block text-center" id="addrow" value="إضافة ضابط ووظيفته" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr></tr>
+                    </tfoot>
+                </table>
+            </fieldset>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="إضافة" class="btn btn-lg btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("الرجوع إلى القائمة", "Index", null, new { @class = "action_link" })
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/bootstrap-selectpicker")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap-selectpicker")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var counter = 1;
+        $("#addrow").on("click", function () {
+            var newRow = $("<tr>");
+
+            var selectListId = "listOfTournamentOfficers_0__OfficerId";
+            var selectListItems = $('#' + selectListId).html();
+
+            //new selectlist properties name and id
+            var newSelectListId = selectListId + counter.toString();
+            var newSelectListName = "listOfTournamentOfficers[" + counter.toString() + "].OfficerId";
+
+            //new input text role name and id
+            var NewOfficerRoleId = "listOfTournamentOfficers_" + counter.toString() + "__OfficerRole";
+            var NewOfficerRoleName = "listOfTournamentOfficers[" + counter.toString() + "].OfficerRole";
+
+            var cols = "";
+
+            cols += '<td><select class="form-control tournamentOfficer" name="' + newSelectListName + '" id="' + newSelectListId + '"' + selectListItems + '</select></td>';
+            cols += '<td><input class="form-control tournamentOfficerMission" name="' + NewOfficerRoleName + '" id="' + NewOfficerRoleId + '" type="text" /></td>';
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="حذف"></td>';
+
+            newRow.append(cols);
+
+            $("table.order-list").append(newRow);
+
+            $('#' + newSelectListId).selectpicker({
+                liveSearch: true,
+                showSubtext: true,
+
+            });
+
+            counter++;
+            return false;
+        });
+
+        $("table.order-list").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            counter -= 1
+
+            $("select.tournamentOfficer").each(function (index) {
+                //new input text role name and id
+                var selectListId = "listOfTournamentOfficers_0__OfficerId";
+                var newSelectListId = selectListId;
+                if (index > 0) {
+                    newSelectListId += index;
+                }
+                var newSelectListName = "listOfTournamentOfficers[" + index.toString() + "].OfficerId";
+                $(this).attr("id", newSelectListId);
+                $(this).attr("name", newSelectListName);
+            })
+
+            $("input.tournamentOfficerMission").each(function (index) {
+                //new input text role name and id
+                var NewOfficerRoleId = "listOfTournamentOfficers_" + index.toString() + "__OfficerRole";
+                var NewOfficerRoleName = "listOfTournamentOfficers[" + index.toString() + "].OfficerRole";
+                $(this).attr("id", NewOfficerRoleId);
+                $(this).attr("name", NewOfficerRoleName);
+            })
+        });
+
+    </script>
+}
+
+

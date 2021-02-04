@@ -1,0 +1,244 @@
+﻿@model MVC_Officer_Mission.Models.ViewModels.OfficerViewModel
+
+@{
+    ViewBag.Title = "تعديل ضابط";
+}
+
+<h2>تعديل ضابط</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Officer.Id)
+
+
+        <fieldset class="f_officerPersonalInfo">
+            <legend>المعلومات الشخصية</legend>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.ProfileImage, "الصورة الشخصية", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <img class="officerProfileImage" width="100" src="~/Media/OfficersProfileImages/@MVC_Officer_Mission.Controllers.OfficersController.getOfficerProfileImage(Model.Officer)" />
+                    <input type="file" name="ProfileImage" id="ProfileImage" class="form-control" />
+                    @if (!string.IsNullOrEmpty(Model.Officer.ProfileImage))
+                    {
+                        @Html.CheckBox("DeleteProfileImage", false) <label for="DeleteProfileImage">حذف الصورة</label>
+                    }
+                    @Html.Hidden("OldProfileImage", Model.Officer.ProfileImage)
+                </div>
+                @Html.LabelFor(model => model.Officer.IsInInstitute, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Officer.IsInInstitute)
+                        @Html.ValidationMessageFor(model => model.Officer.IsInInstitute, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+               
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.DepartmentId, "القطعة", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Officer.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.DepartmentId, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Officer.DepartmentId, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.IsHeadOfDepartment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Officer.IsHeadOfDepartment)
+                        @Html.ValidationMessageFor(model => model.Officer.IsHeadOfDepartment, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.RankId, "الرتبة", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.Officer.RankId, (IEnumerable<SelectListItem>)ViewBag.RankId, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Officer.RankId, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.MilitaryNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.MilitaryNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.MilitaryNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.FirstName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.FatherName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.FatherName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.FatherName, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.MotherFullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.MotherFullName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.MotherFullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.BirthDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.Officer.BirthDate, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.Address, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                    @Html.ValidationMessageFor(model => model.Officer.Email, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Officer.Specifications.First().Id, "التخصص", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.ListBox("specificationlist", (IEnumerable<SelectListItem>)ViewBag.SpecificationId, htmlAttributes: new { @class = "form-control selectpicker show-menu-arrow" })
+                    @Html.ValidationMessageFor(model => model.Officer.Specifications.First().Id, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Officer.CollegeCertificates, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Officer.CollegeCertificates, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Officer.CollegeCertificates, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="f_officerExternalMissions">
+            <legend>الدورات الخارجية</legend>
+            <table id="officerRoleInMissionWrapper" class="table order-list">
+                <thead>
+                    <tr>
+                        <td class="col-sm-2"></td>
+                        <td class="col-sm-8">@Html.LabelFor(model => model.Officer.ExternalTournaments.First().Name, htmlAttributes: new { @class = "control-label" })</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int index = 0;
+                        foreach (var extT in Model.OfficerExternalTournaments)
+                        {
+                            <tr>
+                                <td class="col-sm-2"></td>
+                                <td class="col-sm-8">
+                                    @*<input type="text" name="OfficerRole" id="OfficerRole{@index}" class="form-control" value="@officerRole" />*@
+                                    @Html.EditorFor(m => m.OfficerExternalTournaments[index].Name, new { htmlAttributes = new { @Value = extT.Name, @class = "form-control officerExternalTournament " } })
+                                    @if (index > 0)
+                                    {
+                                    <td class="col-sm-2"><input type="button" class="ibtnDel btn btn-md btn-danger " value="حذف"></td>
+                                    }
+                                </tr>
+                            index++;
+                        }
+                        //index saved as HiddenFieldPageStatePersister to start from when adding new officers
+                        @Html.Hidden("officerExternalTournamentsIndex", index.ToString())
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="col-sm-4"></td>
+                        <td class="col-sm-4">
+                            <input type="button" class="btn btn-lg btn-block text-center" id="addrow" value="إضافة دورة" />
+                        </td>
+                        <td class="col-sm-4"></td>
+                    </tr>
+                    <tr></tr>
+                </tfoot>
+            </table>
+        </fieldset>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="تعديل" class="btn btn-lg btn-primary" />
+            </div>
+        </div>
+    </div>
+                        }
+
+<div>
+    @Html.ActionLink("الرجوع إلى القائمة", "Index", "", new { @class = "action_link" })
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/bootstrap-selectpicker")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap-selectpicker")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var counter = $("#officerExternalTournamentsIndex").val();
+        $("#addrow").on("click", function () {
+            var newRow = $("<tr>");
+
+            //new input text role name and id
+            var NewExternalTournamentId = "OfficerExternalTournaments_" + counter.toString() + "__Name";
+            var NewExternalTournamentName = "OfficerExternalTournaments[" + counter.toString() + "].Name";
+
+            var cols = "";
+
+            cols += '<td class="col-sm-2"></td>';
+            cols += '<td class="col-sm-8"><input class="form-control officerExternalTournament" name="' + NewExternalTournamentName + '" id="' + NewExternalTournamentId + '" type="text" /></td>';
+            cols += '<td class="col-sm-2"><input type="button" class="ibtnDel btn btn-md btn-danger " value="حذف"></td>';
+
+            newRow.append(cols);
+
+            $("table.order-list").append(newRow);
+
+            counter++;
+            return false;
+        });
+
+        $("table.order-list").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            counter -= 1
+
+            $(".officerExternalTournament").each(function (index) {
+                //new input text role name and id
+                var NewExternalTournamentId = "OfficerExternalTournaments_" + index.toString() + "__Name";
+                var NewExternalTournamentName = "OfficerExternalTournaments[" + index.toString() + "].Name";
+                $(this).attr("id", NewExternalTournamentId);
+                $(this).attr("name", NewExternalTournamentName);
+            })
+        });
+
+    </script>
+}

@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+@using MVC_Officer_Mission.Controllers
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @*@Html.ActionLink("مرحباً " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            @*
+        <a href="javascript:void(0);"> @GlobalController.GetUserName(User.Identity.GetUserId())</a>*@
+            @Html.ActionLink(@GlobalController.GetUserName(User.Identity.GetUserId()), "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { id = User.Identity.GetUserId() ,  @class = "LoginPartielUserName"} )
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">تسجيل الخروج</a></li>
+    </ul>
+    }
+}
+@*else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("تسجيل الدخول", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}*@
+@section Scripts {
+    <script>
+        $('.LoginPartielUserName').addClass("active");
+    </script>
+}
+

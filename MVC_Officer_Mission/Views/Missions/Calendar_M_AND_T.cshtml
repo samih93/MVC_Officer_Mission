@@ -1,0 +1,461 @@
+﻿@model IEnumerable<MVC_Officer_Mission.Models.Officer>
+@using MVC_Officer_Mission.Controllers
+@using MVC_Officer_Mission.Models
+@{
+    ViewBag.Title = "مهمات الضباط";
+}
+@*standar User*@
+@*kalam-idara and kalam khdeme add mission  *@
+@*kalam-adid add mission but her name ma2zounya  *@
+@*standar User*@
+
+
+<h2>مهمات الضباط</h2>
+@if (@Request.IsAuthenticated && User.IsInRole("admin") // if admin
+ || User.IsInRole("standard")
+
+    )
+{
+    var AddName = User.Identity.Name == "kalam-adid@isf.com" ? "إضافة مأذونية" : "إضافة مهمة / دورة";
+    <p>
+
+        @Html.ActionLink(AddName, "Create", "", new { @class = "action_link" })
+    </p>
+}
+
+@{
+
+    DateTime selected_date = DateTime.Now;
+    int year, month;
+
+    List<Mission> officerMissions;
+
+    //validation of year and month
+    if (!String.IsNullOrEmpty(Request.QueryString["year"]) &&
+    !String.IsNullOrEmpty(Request.QueryString["month"]) &&
+    int.TryParse(Request.QueryString["year"], out year) &&
+    int.TryParse(Request.QueryString["month"], out month) &&
+    GlobalController.IsValidDate(year, month, 1))
+    {
+        selected_date = new DateTime(year, month, 1);
+    }
+    else
+    {
+        month = selected_date.Month;
+        year = selected_date.Year;
+    }
+    var DaysInmonth = DateTime.DaysInMonth(year, month);
+    DateTime monthStartDate = new DateTime(year, month, 1);
+    DateTime monthEndDate = new DateTime(year, month, DaysInmonth);
+}
+@using (Html.BeginForm("Calendar_M_AND_T", "Missions", FormMethod.Get))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("السنة", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownList("year", GlobalController.GenerateYearsDDL(year), htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.Label("الشهر", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.DropDownList("month", GlobalController.GenerateMonthsDDL(month), htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="اختيار" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.Label("الضباط", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.DropDownList("listOfOfficers", (IEnumerable<SelectListItem>)ViewBag.listOfOfficers, new
+       {
+           @class = "form-control selectpicker show-menu-arrow col-md-4",
+           data_live_search = "true",
+           multiple = "multiple",
+           data_actions_box = "true"
+       })
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-12">
+    <div class="col-md-1 map_tournament">
+    </div>
+    <div class="col-md-1">دورة</div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-1 map_mission">
+    </div>
+    <div class="col-md-1">مهمة</div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-1 map_ma2zounya">
+    </div>
+    <div class="col-md-1">مأذونية</div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-1 map_pending">
+    </div>
+    <div class="col-md-2">دورة بانتظار الموافقة</div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">@GlobalController.ArabicMonthName(selected_date.Month) @selected_date.Year </h2>
+        @*  <h2 class="text-center">@</h2>*@
+        <div class="tbl-header">
+            <table class="fixed_headers table table-bordered" id="missionsCal" data-monthStart="@monthStartDate.ToString("yyy-MM-dd")" data-monthEnd="@monthEndDate.ToString("yyy-MM-dd")">
+                <thead>
+                    <tr>
+                        <th>أسماء الضباط</th>
+                        <!--Loop all the days of month and print it-->
+
+                        @{var bgcolor = ""; }
+
+                        @for (var day = 1; day <= DaysInmonth; day++)
+                        {
+                            bgcolor = (DateTime.Now.Day.Equals(day) && DateTime.Now.Month.Equals(selected_date.Month)) ? "td_today_color" : "";
+                            <th class="@bgcolor">@day</th>
+                        }
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table class="fixed_headers table table-bordered" id="missionsCal" data-monthStart="@monthStartDate.ToString("yyy-MM-dd")" data-monthEnd="@monthEndDate.ToString("yyy-MM-dd")">
+
+                <tbody>
+                    <!--Loop model-->
+                    @foreach (var officer in Model)
+                    {
+                        //list of officer missions
+                        officerMissions = MissionsController.GetOfficerMissionsInMonth(officer, new DateTime(year, month, 1));
+                        //if no missions
+                        if (officerMissions.Count == 0)
+                        {
+
+                            <tr data-officer-id="o-@officer.Id">
+                                <td>@officer.FullName</td>
+
+                                <!--loop all days of month-->
+                                @for (var day = 1; day <= DaysInmonth; day++)
+                                {
+                                    bgcolor = (DateTime.Now.Day.Equals(day) && DateTime.Now.Month.Equals(selected_date.Month)) ? "td_today_color" : "";
+
+                                    string currentLoopDate = new DateTime(year, month, day).ToString("yyy-MM-dd");
+                                    <td data-date="@currentLoopDate" class="@bgcolor"></td>
+                                }
+                            </tr>
+                        }
+                        else
+                        {
+                            int rowspan = 0;
+                            string rowspanHtml = "";
+                            for (int i = 0; i < officerMissions.Count; i++)
+                            {
+                                <tr data-officer-id="o-@officer.Id" data-mission-id="o-@officer.Id-m-@officerMissions[i].Id">
+                                    @if (i == 0)
+                                    {
+                                        rowspan = officerMissions.Count;
+                                        rowspanHtml = $"rowspan={rowspan}";
+                                        <td @rowspanHtml>@officer.FullName</td>
+                                    }
+                                    <!--loop all days of month-->
+                                    @for (var day = 1; day <= DaysInmonth; day++)
+                                    {
+                                        bgcolor = (DateTime.Now.Day.Equals(day) && DateTime.Now.Month.Equals(selected_date.Month)) ? "td_today_color" : "";
+                                        string currentLoopDate = new DateTime(year, month, day).ToString("yyy-MM-dd");
+                                        <td data-date="@currentLoopDate" class="@bgcolor"></td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div id="missionsData" class="hidden">
+    @foreach (var officer in Model)
+    {
+
+        //list of current officer missions in current month in loop
+        officerMissions = MissionsController.GetOfficerMissionsInMonth(officer, new DateTime(year, month, 1));
+        <div id="o-@officer.Id" class="officerData" data-hasmission="@officerMissions.Count" data-officer="@officer.FullName">
+            @officer.FullName
+            <div class="missions">
+                @foreach (Mission item in officerMissions)
+                {
+                    var UserInsertedTheCurrentMission = MissionsController.GetUserInsertedMission(item);
+                    <div class="missionItem" id="o-@officer.Id-m-@item.Id" data-istournament="@item.Istournament.ToString()" User-inserted-current-mission="@UserInsertedTheCurrentMission" data-document-number="@(item.Istournament==true ? (!String.IsNullOrEmpty(item.Tournament.DocumentOrder)?item.Tournament.DocumentOrder.ToString() :"") :"")" data-from="@item.From.ToString(" yyy-MM-dd")" data-to="@item.To.ToString(" yyy-MM-dd")">
+                        @{
+                            var RoleInMision = item.Istournament ? item.Tournament.OfficersRolesInMission.Where(m => m.OfficerId == officer.Id).First().OfficerRole + " في" : "";
+                        }
+
+                        <span> @MissionsController.GetMissionDisplayName(item, RoleInMision, year, month) @* من @item.From.ToString("yyy-MM-dd") إلى @item.To.ToString("yyy-MM-dd")*@</span>
+                        <div class="hidden">
+                            @{
+                                string m_name = UserInsertedTheCurrentMission == "kalam-adid@isf.com" ? "إسم المأذونية" : item.Istournament ? "اسم الدورة" : "اسم المهمة";
+
+                            }
+                            <table class="missionPopupData">
+                                <tr>
+                                    <td>@m_name</td>
+                                    <td> : </td>
+                                    <td><text id="mission_name">@item.Name</text></td>
+                                </tr>
+                                <tr>
+                                    <td>من</td>
+                                    <td> : </td>
+                                    <td><text id="from">@item.From.ToString("yyy-MM-dd")</text></td>
+                                </tr>
+                                <tr>
+                                    <td>الى</td>
+                                    <td> : </td>
+                                    <td><text id="to">@item.To.ToString("yyy-MM-dd")</text></td>
+                                </tr>
+                                @if (item.Istournament == true)
+                                {
+                                    string grad_date = item.Tournament.GraduationDate.HasValue ? @item.Tournament.GraduationDate.Value.ToString("yyy-MM-dd") : "";
+
+                                    <tr>
+                                        <td>القطعة</td>
+                                        <td> : </td>
+                                        <td><text id="dep">@item.Tournament.Department</text></td>
+                                    </tr>
+                                    <tr>
+                                        <td>القاعة</td>
+                                        <td> : </td>
+                                        <td><text id="room">@item.Tournament.Room</text></td>
+                                    </tr>
+                                    <tr>
+                                        <td>امر المستند</td>
+                                        <td> : </td>
+                                        <td><text id="doc_order">@item.Tournament.DocumentOrder</text></td>
+                                    </tr>
+                                    <tr>
+                                        <td>تاريخ التخريج</td>
+                                        <td> : </td>
+                                        <td><text id="mission_Date">@grad_date</text></td>
+                                    </tr>
+                                    <tr>
+                                        <td> الجهة المانحة</td>
+                                        <td> : </td>
+                                        <td><text id="mission_Date">@item.Tournament.Provider</text></td>
+                                    </tr>
+                                }
+
+                                @if (@Request.IsAuthenticated && User.IsInRole("admin"))
+                                {
+                                    <tr><td></td><td></td><td></td></tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.ActionLink("تعديل", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn_update" })
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink("حذف", "Delete", new { id = item.Id }, new { @class = "btn btn-warning btn_update" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles{
+    @Styles.Render("~/Content/fancybox")
+    @Styles.Render("~/Content/bootstrap-selectpicker")
+    <style>
+        /*.fixed_headers {
+            width: 100%;
+        }
+
+            .fixed_headers tbody {
+                height: 200px;
+                overflow-y: auto;
+                width: 100%;
+            }
+
+            .fixed_headers tbody,
+            .fixed_headers thead,
+            .fixed_headers tr,
+            .fixed_headers th,
+            .fixed_headers td {
+                display: block;
+            }
+
+                .fixed_headers tbody td {
+                    float: left;
+                }
+
+                .fixed_headers thead tr th {
+                    float: left;
+                    background-color: #f39c12;
+                    border-color: #e67e22;
+                }*/
+    </style>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/fancybox")
+    @Scripts.Render("~/bundles/bootstrap-selectpicker")
+
+    <script>
+        $(document).ready(function () {
+            var monthStartDate = new Date($("#missionsCal").attr("data-monthStart"));
+            monthStartDate.setHours(0, 0, 0, 0);
+            var monthEndDate = new Date($("#missionsCal").attr("data-monthEnd"));
+            monthEndDate.setHours(0, 0, 0, 0);
+
+            //looping on officers data
+            $("#missionsData .officerData").each(function () {
+
+                //if officer in loop has mission
+                if ($(this).attr("data-hasmission") != "0") {
+
+                    //looping on missions
+                    $(this).find(".missions .missionItem").each(function () {
+                        var mission_id = $(this).attr("id");
+                        var from = new Date($(this).attr("data-from").trim());
+                        from.setHours(0, 0, 0, 0);
+                        var to = new Date($(this).attr("data-to").trim());
+                        to.setHours(0, 0, 0, 0);
+                        var mission_text = $(this).find("span").text();
+                        var is_tournament = $(this).attr("data-istournament").toLowerCase();
+                        var document_order = $(this).attr("data-document-number").toLowerCase();
+                        var UserInsertedTheCurrentMission = $(this).attr("User-inserted-current-mission").toLowerCase();
+
+
+
+                        //looping on cells but not first since first contains the officer name
+                        var counter = 0;
+                        $("#missionsCal tr[data-mission-id=" + mission_id + "] td[data-date]").each(function () {
+
+                            //current cell date
+                            var dayDate = new Date($(this).attr("data-date").trim());
+                            dayDate.setHours(0, 0, 0, 0);
+
+                            //if current day date is between from and to
+                            if (dateBetween(dayDate, from, to)) {
+                                $(this).addClass("missionCell");
+                                $(this).attr("data-missionid", mission_id);
+                                $(this).addClass(is_tournament == "true" ? "isTournament" : "isNotTournament");
+                                if ((document_order == null || document_order == "") && is_tournament == "true") {
+                                    $(this).addClass("withoutapproval");
+                                }
+                                if (UserInsertedTheCurrentMission == "kalam-adid@isf.com") {
+                                    $(this).addClass("IsMa2zounya");
+                                    $(this).removeClass("isNotTournament");
+
+
+
+                                }
+
+                                //number of cells for colspan
+                                var colspan_cells_nb, index = 0;
+
+                                //if day in loop between from and to and from < month start
+                                if (from < monthStartDate && dateBetween(dayDate, from, to)) {
+                                    //if first day of month
+                                    if (dayDate.getTime() == monthStartDate.getTime()) {
+                                        colspan_cells_nb = (monthEndDate >= to) ? daysBetween(monthStartDate, to) : daysBetween(monthStartDate, monthEndDate);
+                                        //console.log(colspan_cells_nb);
+                                        $(this).attr("colspan", colspan_cells_nb);
+                                        $(this).text(mission_text);
+                                    } else {
+                                        $(this).remove();
+                                    }
+                                } else if (from >= monthStartDate && dateBetween(dayDate, from, to)) {
+                                    if (dayDate.getTime() == from.getTime()) {
+                                        colspan_cells_nb = (monthEndDate >= to) ? daysBetween(from, to) : daysBetween(from, monthEndDate);
+                                        $(this).attr("colspan", colspan_cells_nb);
+                                        $(this).text(mission_text);
+                                    } else {
+                                        $(this).remove();
+                                    }
+                                } else {
+                                    //$(this).remove();
+                                }
+                            }
+                            counter++;
+                        })
+                    })
+                }
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            //popup show hide
+            $(".missionCell").click(function () {
+                var mission_id = $(this).closest("tr").attr("data-mission-id");
+                var selector = "#missionsData .missionItem[id=" + mission_id + "] .missionPopupData";
+                var mission_popup_data = $('<div>').append($(selector).clone()).html()
+                $.fancybox.open(mission_popup_data);
+            })
+
+            //officer rows hide or show filter
+            var officersCount = $('#listOfOfficers > option').length;
+            $("#listOfOfficers").change(function () {
+                var selectedValues = $(this).val();
+                if (selectedValues != null) {
+                    $("#missionsCal tbody tr").fadeOut();
+                    $.each(selectedValues, function (index, selectedOfficerId) {
+                        var selector = "#missionsCal tr[data-officer-id='o-" + selectedOfficerId + "']";
+                        $(selector).fadeIn();
+
+                    })
+                } else {
+                    $("#missionsCal tbody tr").fadeIn();
+
+                }
+                //if we selected officers but not all, we need to remove the header margin right since there is no scroller
+                if (selectedValues != null && selectedValues.length > 0 && selectedValues.length < officersCount) {
+                    $('.tbl-header').css({ 'margin-right': '' });
+                } else {
+                    fitTable();
+                }
+            })
+        })
+    </script>
+
+    <script>
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        function fitTable() {
+            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+            //console.log("$('.tbl-content').width() - $('.tbl-content table').width() = " + $('.tbl-content').width() + "-" + $('.tbl-content table').width())
+            //console.log(scrollWidth);
+            $('.tbl-header').css({ 'margin-right': scrollWidth });
+        }
+        $(window).on("load resize ", function () {
+            fitTable();
+        }).resize();
+    </script>
+    <script>
+        $('.CalendarM__AND_TLink').addClass("activelink");
+    </script>
+}
