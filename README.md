@@ -3,5 +3,5 @@ every Employee have clicked mission with start and end date to view mission deta
 #using 
 c# , javascript ,css
 
-![898b0da7-0e4d-46f2-a243-949a17572474](https://user-images.githubusercontent.com/78031951/150743712-e87af7a0-379f-44cb-a2d0-6b69cea82db9.png)
+![898b0da7-0e4d-46f2-a243-949a17572474](https://user-images.githubusercontent.com/78031951/150744242-32fc34da-d2c5-4fea-9437-3f648df9ca15.png)
 
